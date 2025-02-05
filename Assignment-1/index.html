@@ -1,0 +1,108 @@
+<!DOCTYPE html> 
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Assignment</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #f2f2f2;
+            }
+            header {
+                background-color: #00698f;
+                color: #ffffff;
+                padding: 20px;
+                text-align: center;
+            }
+            h1 {
+                color: #ffffff;
+            }
+            main {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px;
+            }
+            a {
+                text-decoration: none;
+                color: #00698f;
+            }
+            a:hover {
+                color: #003d5b;
+            }
+            form {
+                width: 50%;
+                margin: 20px auto;
+                padding: 20px;
+                background-color: #ffffff;
+                border: 1px solid #cccccc;
+                border-radius: 10px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+            label {
+                display: block;
+                margin-bottom: 10px;
+            }
+            input, textarea {
+                width: 100%;
+                padding: 10px;
+                margin-bottom: 20px;
+                border: 1px solid #cccccc;
+                border-radius: 5px;
+            }
+            button[type="submit"] {
+                width: 100%;
+                padding: 10px;
+                background-color: #00698f;
+                color: #ffffff;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+            button[type="submit"]:hover {
+                background-color: #003d5b;
+            }
+            .error {
+                color: #ff0000;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>Welcome to Centilytics</h1>
+        </header>
+        <main>
+            <p>First day in Centilytics</p>
+            <a href="https://www.centilytics.com/" target="_blank" rel="noopener noreferrer">Visit our Website</a>
+            
+            <form action="/submit" method="POST" id="contact-form">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                <div class="error" id="name-error"></div>
+            
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <div class="error" id="email-error"></div>
+            
+                <label for="message">Message:</label>
+                <textarea id="message" name="message"></textarea>
+                <div class="error" id="message-error"></div>
+
+                <button type="submit">Submit</button>
+            </form>
+        </main>
+        <script>
+            const form = document.getElementById('contact-form');
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const message = document.getElementById('message').value;
+                console.log(name, email, message);
+            });
+        </script>
+    </body>
+</html>
