@@ -27,29 +27,26 @@ class Product {
 
   factory Product.fromJson(Map<String, dynamic> json) {
     return Product(
-      id: json['id'] ?? 0,
+      id: json['id']?.toInt() ?? 0,
       title: json['title']?.toString() ?? '',
       description: json['description']?.toString() ?? '',
-      price: (json['price'] == 0) 
-          ? 0.0
-          : (json['price'] is int) 
-              ? (json['price'] as int).toDouble() 
-              : (json['price'] as num).toDouble(),
-      discountPercentage: (json['discountPercentage'] == 0)
-          ? 0.0
-          : (json['discountPercentage'] is int)
-              ? (json['discountPercentage'] as int).toDouble()
-              : (json['discountPercentage'] as num).toDouble(),
-      rating: (json['rating'] == 0)
-          ? 0.0
-          : (json['rating'] is int)
-              ? (json['rating'] as int).toDouble()
-              : (json['rating'] as num).toDouble(),
-      stock: json['stock'] ?? 0,
+      price: _parseDouble(json['price']) ?? 0.0,
+      discountPercentage: _parseDouble(json['discountPercentage']) ?? 0.0,
+      rating: _parseDouble(json['rating']) ?? 0.0,
+      stock: json['stock']?.toInt() ?? 0,
       brand: json['brand']?.toString() ?? '',
       category: json['category']?.toString() ?? '',
       thumbnail: json['thumbnail']?.toString() ?? '',
-      images: (json['images'] as List?)?.map((e) => e.toString()).toList() ?? [],
+      images:
+          (json['images'] as List?)?.map((e) => e.toString()).toList() ?? [],
     );
+  }
+
+  // Helper method to safely parse doubles from various numeric types or null
+  static double? _parseDouble(dynamic value) {
+    if (value == null) return null;
+    if (value is num) return value.toDouble();
+    if (value is String) return double.tryParse(value);
+    return null;
   }
 }
